@@ -17,14 +17,23 @@ server.get('./bundle.js/:3000', (req, res) => {
   })
 })
 
-server.get('./bundle.js/:3001', (req, res) => {
-  request('http://localhost:3001/bundle.js', (error, response, body) => {
+server.get('/api/contact/:name', function(req, res) {
+  request(`http://localhost:2000/api/contact/:name`, (error, response, body) => {
+    // console.log(body)
+    if (response.statusCode === 200) {
+      res.status(200).send(body);
+    }
+  })
+});
+
+server.get('./bundle.js/:8081', (req, res) => {
+  request('http://localhost:8081/bundle.js', (error, response, body) => {
     res.status(200).send(body);
   })
 })
 
 server.use('/api/cities', (req, res) => {
-  request(`http://localhost:3001/api/cities`, (error, response, body) => {
+  request(`http://localhost:8081/api/cities`, (error, response, body) => {
     // console.log(body)
     if (response.statusCode === 200) {
       res.status(200).send(body);
@@ -34,7 +43,7 @@ server.use('/api/cities', (req, res) => {
 
 server.use('/restaurant', (req, res) => {
   console.log(req.query.name)
-  request(`http://localhost:3001/restaurant?name=${req.query.name}`, (error, response, body) => {
+  request(`http://localhost:8081/restaurant?name=${req.query.name}`, (error, response, body) => {
     console.log(error)
     if (response.statusCode === 200) {
       // console.log(response)
