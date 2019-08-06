@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:5000'
+  phases:
+    - duration: 300
+      arrivalRate: 1000
+scenarios:
+  - flow:
+    - get:
+        url: '/pg/restaurant/9900010'
+        json:  
+          "id": 9900010
+    # - del:
+    #     url: '/pg/restaurant/10000006'
+    # - put:
+    #     url: '/pg/restaurant/9900011' 
